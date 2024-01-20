@@ -4,6 +4,9 @@ import Link from "next/link";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Roboto } from "next/font/google";
 import useRegistrationModel from "@/app/hooks/useRegisterModel";
+import useLoginModel from "@/app/hooks/useLoginModel";
+import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
 type Props = {};
 
 const roboto = Roboto({
@@ -11,11 +14,14 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
-export default function Navbar({}: Props) {
- const registerModel = useRegistrationModel();
+interface navbarProps {
+  currentUser?: User | null;
+}
 
+export default function Navbar({ currentUser }: navbarProps) {
+  const registerModel = useRegistrationModel();
+  const loginModel = useLoginModel();
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
@@ -45,7 +51,6 @@ export default function Navbar({}: Props) {
           </svg>
           <span className=" font-extrabold text-xl">Hoardinger</span>
         </div>
-
         <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-2 py-1 m-1">
           <div className=" items-center flex">Search Places</div>
           <span className="border-l border-gray-300 "></span>
@@ -66,6 +71,8 @@ export default function Navbar({}: Props) {
             </svg>
           </button>
         </div>
+
+        {/* ----------------------------------UserMenu--------------------------------------------- */}
 
         <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-2 py-[2px] m-1">
           <div onClick={() => {}} className="items-center flex">
@@ -99,18 +106,56 @@ export default function Navbar({}: Props) {
       {isOpen && (
         <div className=" absolute rounded-lg shadow-md w-[60vw] md:w-2/4  bg-slate-300 overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            <div
-              onClick={() => {}}
-              className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
-            >
-              Login
-            </div>
-            <div
-              onClick={registerModel.onOpen}
-              className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
-            >
-              Sign up
-            </div>
+            {currentUser ? (
+              <>
+                <div
+                  onClick={() => {}}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                >
+                  My Favorites
+                </div>
+                <div
+                  onClick={() => {}}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                >
+                  My Reservations
+                </div>
+                <div
+                  onClick={() => {}}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                >
+                  My Properties
+                </div>
+                <div
+                  onClick={() => {}}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                >
+                  Add Your's
+                </div>
+                <hr />
+                <div
+                  onClick={() => signOut()}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                >
+                  Logout
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  onClick={loginModel.onOpen}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                >
+                  Login
+                </div>
+                <div
+                  onClick={registerModel.onOpen}
+                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+                >
+                  Sign up
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

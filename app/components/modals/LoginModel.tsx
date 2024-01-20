@@ -12,11 +12,16 @@ import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
+import useLoginModel from "@/app/hooks/useLoginModel";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
-export default function RegisterModel({}: Props) {
+export default function LoginModel({}: Props) {
+  const router = useRouter();
   const registerModel = useRegistrationModel();
+  const loginModel = useLoginModel();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -25,7 +30,6 @@ export default function RegisterModel({}: Props) {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -34,33 +38,30 @@ export default function RegisterModel({}: Props) {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    axios
-      .post("/api/register", data)
-      .then(() => {
-        registerModel.onClose();
-      })
-      .catch((error) => {
-        toast.error("Something Got Wrong!!");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false);
+
+      if (callback?.ok) {
+        toast.success("Logged in");
+        router.refresh();
+        loginModel.onClose();
+      }
+
+      if (callback?.error) {
+        toast.error(callback.error);
+      }
+    });
   };
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="Welcome to Hoardinger" subtitle="Create an Account!" />
+      <Heading title="Welcome Back!" subtitle="Login to your account!" />
       <Input
         id="email"
         label="Email"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="name"
-        label="Name"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -110,10 +111,10 @@ export default function RegisterModel({}: Props) {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={registerModel.isOpen}
-      title="Register"
+      isOpen={loginModel.isOpen}
+      title="Login"
       actionLabel="Continue"
-      onClose={registerModel.onClose}
+      onClose={loginModel.onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}

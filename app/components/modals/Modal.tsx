@@ -121,9 +121,7 @@ const Modal = ({
                     onClick={handleSubmit}
                   />
                 </div>
-                <div>
-                  {footer}
-                </div>
+                <div>{footer}</div>
               </div>
             </div>
           </div>
