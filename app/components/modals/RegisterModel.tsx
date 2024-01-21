@@ -12,6 +12,9 @@ import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
+import { signIn } from "next-auth/react";
+import Github from "next-auth/providers/github";
+import NextAuth from "next-auth/next";
 
 type Props = {};
 
@@ -85,17 +88,22 @@ export default function RegisterModel({}: Props) {
         outline
         label="Continue With Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => {
+          signIn("google");
+        }}
       />
       <Button
         outline
         label="Continue With Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => {
+          signIn("github");
+        }}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2 ">
           <div>Already have an account?</div>
+
           <div
             onClick={registerModel.onClose}
             className=" text-neutral-800 cursor-pointer hover:underline"
