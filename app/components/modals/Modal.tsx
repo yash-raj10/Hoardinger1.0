@@ -55,11 +55,11 @@ const Modal = ({
   }, [disabled, onSubmit]);
 
   const handleSecondaryActin = useCallback(() => {
-    if (disabled || SecondaryActin) {
+    if (disabled || !SecondaryActin) {
       return;
     }
-    onSubmit();
-  }, [disabled, SecondaryActin]);
+    SecondaryActin();
+  }, [SecondaryActin, disabled]);
 
   if (!isOpen) {
     return null;

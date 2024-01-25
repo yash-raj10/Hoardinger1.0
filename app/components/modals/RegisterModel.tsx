@@ -15,12 +15,20 @@ import Button from "../Button";
 import { signIn } from "next-auth/react";
 import Github from "next-auth/providers/github";
 import NextAuth from "next-auth/next";
+import LoginModel from "./LoginModel";
+import useLoginModel from "@/app/hooks/useLoginModel";
 
 type Props = {};
 
 export default function RegisterModel({}: Props) {
   const registerModel = useRegistrationModel();
   const [isLoading, setIsLoading] = useState(false);
+  const loginModel = useLoginModel();
+
+  const toggle = useCallback(() => {
+    registerModel.onClose();
+    loginModel.onOpen();
+  }, [loginModel, registerModel]);
 
   const {
     register,
@@ -103,9 +111,8 @@ export default function RegisterModel({}: Props) {
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2 ">
           <div>Already have an account?</div>
-
           <div
-            onClick={registerModel.onClose}
+            onClick={toggle}
             className=" text-neutral-800 cursor-pointer hover:underline"
           >
             Log in?

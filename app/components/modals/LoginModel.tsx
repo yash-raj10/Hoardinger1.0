@@ -15,6 +15,7 @@ import Button from "../Button";
 import useLoginModel from "@/app/hooks/useLoginModel";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { FaRegImages } from "react-icons/fa";
 
 type Props = {};
 
@@ -37,6 +38,7 @@ export default function LoginModel({}: Props) {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
+    // toast.success("Logged in");
 
     signIn("credentials", {
       ...data,
@@ -55,6 +57,11 @@ export default function LoginModel({}: Props) {
       }
     });
   };
+
+  const toggle = useCallback(() => {
+    loginModel.onClose();
+    registerModel.onOpen();
+  }, [loginModel, registerModel]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -100,12 +107,12 @@ export default function LoginModel({}: Props) {
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2 ">
-          <div>Already have an account?</div>
+          <div>First time using Hoardinger?</div>
           <div
-            onClick={registerModel.onClose}
+            onClick={toggle}
             className=" text-neutral-800 cursor-pointer hover:underline"
           >
-            Log in?
+            Create an account
           </div>
         </div>
       </div>

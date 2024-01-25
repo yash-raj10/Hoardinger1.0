@@ -9,8 +9,8 @@ import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
 import Image from "next/image";
-
 import { useSession, getSession } from "next-auth/react";
+import useRentModel from "@/app/hooks/useRentModel";
 
 // const ProfilePage = useSession();
 
@@ -24,14 +24,23 @@ interface navbarProps {
 }
 
 export default function Navbar({ currentUser }: navbarProps) {
-  const registerModel = useRegistrationModel();
-  const loginModel = useLoginModel();
   const [isOpen, setIsOpen] = useState(false);
+  const registerModel = useRegistrationModel();
+  const rentModel = useRentModel();
+  const loginModel = useLoginModel();
+
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
   const src = currentUser?.image;
+
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModel.onOpen();
+    }
+    rentModel.onOpen();
+  }, [currentUser, loginModel, rentModel]);
 
   return (
     <div className={roboto.className}>
@@ -83,7 +92,7 @@ export default function Navbar({ currentUser }: navbarProps) {
         {/* ----------------------------------UserMenu--------------------------------------------- */}
 
         <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-2 py-[2px] m-1">
-          <div onClick={() => {}} className="items-center flex">
+          <div onClick={onRent} className="items-center flex">
             Add Your's
           </div>
           <div className="flex gap-1 border-2 rounded-xl px-2 py-[2px]">
@@ -144,7 +153,7 @@ export default function Navbar({ currentUser }: navbarProps) {
                   My Properties
                 </div>
                 <div
-                  onClick={() => {}}
+                  onClick={rentModel.onOpen}
                   className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                 >
                   Add Your's
