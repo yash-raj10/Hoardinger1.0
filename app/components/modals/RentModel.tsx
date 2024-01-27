@@ -20,6 +20,8 @@ import { useRouter } from "next/navigation";
 import { FaRegImages } from "react-icons/fa";
 import CountrySelect from "../Inputs/CountrySelect";
 import dynamic from "next/dynamic";
+import Counter from "../Inputs/Counter";
+import ImageUpload from "../Inputs/ImageUpload";
 
 enum STEPS {
   LOCATION = 0,
@@ -29,8 +31,10 @@ enum STEPS {
   PRICE = 4,
 }
 export default function RentModel() {
+  const router = useRouter();
   const rentModel = useRentModel();
   const [step, setStep] = useState(STEPS.LOCATION);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -42,9 +46,7 @@ export default function RentModel() {
   } = useForm<FieldValues>({
     defaultValues: {
       location: null,
-      guestCount: 1,
-      roomCount: 1,
-      bathroomCount: 1,
+      monthCount: 1,
       imageSrc: "",
       price: 1,
       title: "",
@@ -53,6 +55,8 @@ export default function RentModel() {
   });
 
   const location = watch("location");
+  const monthCount = watch("monthCount");
+  const imageSrc = watch("imageSrc");
 
   const Map = useMemo(
     () =>
@@ -78,6 +82,30 @@ export default function RentModel() {
     setStep((value) => value + 1);
   };
 
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step !== STEPS.PRICE) {
+      return onNext();
+    }
+
+    setIsLoading(true);
+
+    axios
+      .post("/api/listings", data)
+      .then(() => {
+        toast.success("Listing Created");
+        router.refresh();
+        reset();
+        setStep(STEPS.LOCATION);
+        rentModel.onClose();
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   const actionLabel = useMemo(() => {
     if (step === STEPS.PRICE) {
       return "Create";
@@ -96,7 +124,7 @@ export default function RentModel() {
     <div className="flex flex-col gap-8">
       <Heading
         title="Where is your place located?"
-        subtitle="Enter the Location!"
+        subtitle="Choose the Country!"
       />
       <CountrySelect
         value={location}
@@ -111,8 +139,77 @@ export default function RentModel() {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Where is your place located?"
-          subtitle="Help guests find you!"
+          title="For how much time you want to give it for Rent?"
+          subtitle="Choose the Contract Size (in Months)."
+        />
+        <Counter
+          title="Months"
+          subtitle="How Many?"
+          value={monthCount}
+          onChange={(value) => setCustomValue("monthCount", value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a Photo of Your Hoarding"
+          subtitle="Show Buyers what your Hoarding look like!"
+        />
+        <ImageUpload
+          value={imageSrc}
+          onChange={(value) => setCustomValue("imageSrc", value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add Description."
+          subtitle="Add Details about your Hoarding."
+        />
+        <Input
+          id="title"
+          label="Title"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="description"
+          label="Description"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Now, Set your Price"
+          subtitle="How much  do you charge Monthly?"
+        />
+        <Input
+          id="price"
+          label="Price"
+          type="number"
+          formatPrice
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
         />
       </div>
     );
@@ -126,7 +223,7 @@ export default function RentModel() {
       SecondaryActionLabel={secondaryActionLabel}
       SecondaryActin={step === STEPS.LOCATION ? undefined : onBack}
       onClose={rentModel.onClose}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
     />
   );
