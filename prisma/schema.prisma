@@ -53,10 +53,7 @@ model Listing{
   description String
   imageSrc String
   createdAt DateTime @default(now())
-
- 
   monthCount Int
-
   locationValue String
   userId String @db.ObjectId
   price Int
