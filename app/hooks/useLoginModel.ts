@@ -1,5 +1,4 @@
 import { create } from "zustand";
-
 interface LoginModelStore {
   isOpen: boolean;
   onOpen: () => void;
