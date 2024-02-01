@@ -1,6 +1,6 @@
-# Hoaedinger
+# Hoardinger
 
-Hoaedinger is a Next.js project designed for individuals and government entities to rent out hoarding spaces, including home walls, empty places, banners on roads, highways, and restaurants. This platform facilitates the connection between those offering hoarding spaces and businesses or individuals looking to rent them on a monthly basis.
+Hoardinger is a Next.js project designed for individuals and government entities to rent out hoarding spaces, including home walls, empty places, and banners on roads, highways, and restaurants. This platform facilitates the connection between those offering hoarding spaces and businesses or individuals looking to rent them on a monthly basis.
 
 ## Features
 
@@ -24,9 +24,3 @@ Make sure you have the following installed:
 - MongoDB
 - Prisma CLI
 
-### Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/Hoaedinger.git
