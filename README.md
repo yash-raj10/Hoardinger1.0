@@ -1,6 +1,6 @@
 # Hoardinger
 
-Hoardinger is a Next.js project designed for individuals and government entities to rent out hoarding spaces, including home walls, empty places, and banners on roads, highways, and restaurants. This platform facilitates the connection between those offering hoarding spaces and businesses or individuals looking to rent them on a monthly basis.
+Hoardinger is a Next.js project designed for individuals and government entities to rent out hoarding spaces, including home walls, empty places, and banners on roads, highways, and restaurants. This platform facilitates the connection between those offering hoarding spaces and businesses or individuals looking to rent them on a monthly basis. (Work in progress right now)
 
 ## Features
 
@@ -11,9 +11,7 @@ Hoardinger is a Next.js project designed for individuals and government entities
 - **Tailwind CSS**: Utilizing the utility-first CSS framework to streamline the styling process and ensure a responsive design.
 - **Cloudinary**: Handling the storage and retrieval of images and multimedia associated with hoarding spaces.
 
-
-
-## Getting Started
+- ![Hoaedinger Screenshot](https://raw.githubusercontent.com/yash-raj10/Hoardinger1.0/main/public/Screenshot%20from%202024-02-01%2018-31-00.png?token=GHSAT0AAAAAACM26FGRXXYTWRVYZQ36SHM4ZN3UXKQ)
 
 ### Prerequisites
 
