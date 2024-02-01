@@ -11,7 +11,7 @@ Hoardinger is a Next.js project designed for individuals and government entities
 - **Tailwind CSS**: Utilizing the utility-first CSS framework to streamline the styling process and ensure a responsive design.
 - **Cloudinary**: Handling the storage and retrieval of images and multimedia associated with hoarding spaces.
 
-- ![Hoaedinger Screenshot](https://raw.githubusercontent.com/yash-raj10/Hoardinger1.0/main/public/Screenshot%20from%202024-02-01%2018-31-00.png?token=GHSAT0AAAAAACM26FGRXXYTWRVYZQ36SHM4ZN3UXKQ)
+![Hoaedinger Screenshot](https://raw.githubusercontent.com/yash-raj10/Hoardinger1.0/main/public/Screenshot%20from%202024-02-01%2018-31-00.png?token=GHSAT0AAAAAACM26FGRXXYTWRVYZQ36SHM4ZN3UXKQ)
 
 ### Prerequisites
 
