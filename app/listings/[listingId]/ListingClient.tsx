@@ -1,5 +1,5 @@
 import ListingHead from "@/app/components/listings/ListingHead";
-import ListingInfo from "@/app/components/listings/ListingInfo";
+import { ListingInfo } from "@/app/components/listings/ListingInfo";
 import { SafeListing, SafeUser } from "@/app/types";
 import { Reservition } from "@prisma/client";
 

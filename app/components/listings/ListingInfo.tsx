@@ -3,6 +3,7 @@ import { SafeUser } from "@/app/types";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import React from "react";
+import nodemailer from "nodemailer";
 
 interface ListingInfoProps {
   user: SafeUser;
@@ -15,7 +16,7 @@ const Map = dynamic(() => import("../Map"), {
   ssr: false,
 });
 
-export default function ListingInfo({
+export function ListingInfo({
   user,
   description,
   monthCount,
@@ -23,6 +24,61 @@ export default function ListingInfo({
 }: ListingInfoProps) {
   const { getByValue } = useCountries();
   const coordinates = getByValue(locationValue)?.latlng;
+  //------------------------------------------------------------------
+
+  const send = async () => {
+    "use server";
+    const to = user.email;
+    const stringifiedTo = JSON.stringify(to);
+    await sendMail(
+      stringifiedTo,
+      "yash",
+      "test mail",
+      `<h1>hello ${user.email}<h1/>`
+    );
+
+    async function sendMail(
+      to: string,
+      name: string,
+      subject: string,
+      body: string
+    ) {
+      const { SMTP_EMAIL, SMTP_PASSWORD } = process.env;
+
+      console.log(typeof SMTP_PASSWORD);
+      console.log(typeof SMTP_EMAIL);
+
+      const transport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: SMTP_EMAIL,
+          pass: SMTP_PASSWORD,
+        },
+      });
+
+      try {
+        const testResult = await transport.verify();
+        console.log(testResult);
+      } catch (error) {
+        console.error({ error });
+        return;
+      }
+
+      try {
+        const sendResult = await transport.sendMail({
+          from: SMTP_EMAIL,
+          to,
+          subject,
+          html: body,
+        });
+        console.log(sendResult);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  // -------------------------------------------------------------------------
 
   return (
     <div className="col-span-4 flex flex-col gap-8 p-5">
@@ -45,6 +101,10 @@ export default function ListingInfo({
       <div className="text-lg font-light text-neutral-500">{description}</div>
       <hr />
       <Map center={coordinates} />
+      <hr />
+      <form>
+        <button formAction={send}>email</button>
+      </form>
     </div>
   );
 }
