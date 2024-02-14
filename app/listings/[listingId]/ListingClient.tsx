@@ -9,12 +9,12 @@ interface ListingClientProps {
     user: SafeUser;
   };
 
-  currentUser?: SafeUser | null;
+  currentUser?: SafeUser | null | undefined;
 }
 
 const ListingClient = ({ listing, currentUser }: ListingClientProps) => {
   return (
-    <div className="max-w-screen-lg mx-auto ">
+    <div className="max-w-screen-lg mx-auto pt-8 ">
       <div className="flex flex-col gap-6">
         <ListingHead
           title={listing.title}

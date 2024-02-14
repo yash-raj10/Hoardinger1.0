@@ -8,6 +8,8 @@ export async function getSession() {
   return await getServerSession(authOptions);
 }
 
+// console.log(getemail());
+
 export default async function getCurrentUser() {
   try {
     const session = await getSession();
