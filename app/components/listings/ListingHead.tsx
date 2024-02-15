@@ -11,16 +11,10 @@ interface ListingHeadProps {
   locationValue: string;
   imageSrc: string;
   id: string;
-  currentUser?: SafeUser | null;
+  // currentUser?: SafeUser | null;
 }
 
-function ListingHead({
-  title,
-  locationValue,
-  imageSrc,
-  id,
-  currentUser,
-}: ListingHeadProps) {
+function ListingHead({ title, locationValue, imageSrc, id }: ListingHeadProps) {
   const { getByValue } = useCountries();
 
   const location = getByValue(locationValue);

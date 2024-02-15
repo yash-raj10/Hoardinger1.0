@@ -9,10 +9,10 @@ interface ListingClientProps {
     user: SafeUser;
   };
 
-  currentUser?: SafeUser | null | undefined;
+  // currentUser?: SafeUser | null;
 }
 
-const ListingClient = ({ listing, currentUser }: ListingClientProps) => {
+const ListingClient = ({ listing }: ListingClientProps) => {
   return (
     <div className="max-w-screen-lg mx-auto pt-8 ">
       <div className="flex flex-col gap-6">
@@ -21,7 +21,7 @@ const ListingClient = ({ listing, currentUser }: ListingClientProps) => {
           imageSrc={listing.imageSrc}
           locationValue={listing.locationValue}
           id={listing.id}
-          currentUser={currentUser}
+          // currentUser={currentUser}
         />
 
         <div className=" grid grid-cols-1  md:grid-cols-1 md:gap-10 mt-6">
