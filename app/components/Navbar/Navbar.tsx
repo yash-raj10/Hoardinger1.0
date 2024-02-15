@@ -96,7 +96,7 @@ export default function Navbar({ currentUser }: navbarProps) {
 
           <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-2 py-[2px] m-1">
             <div onClick={onRent} className="items-center flex">
-              Add Your's
+              Add Your&apos;s
             </div>
             <div className="flex gap-1 border-2 rounded-xl px-2 py-[2px]">
               {" "}
@@ -106,6 +106,7 @@ export default function Navbar({ currentUser }: navbarProps) {
               >
                 {(src && (
                   <Image
+                    alt="image"
                     className="rounded-full"
                     width={24}
                     height={24}
@@ -153,7 +154,7 @@ export default function Navbar({ currentUser }: navbarProps) {
                     onClick={rentModel.onOpen}
                     className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                   >
-                    Add Your's
+                    Add Your&apos;s
                   </div>
                   <hr />
                   <div
