@@ -95,8 +95,8 @@ export default function Navbar({ currentUser }: navbarProps) {
               type="search"
               id="searchbox"
               onInput={() => liveSearch()}
-              placeholder="Search Price / PLaces"
-              className=" max-w-48 shadow-white border  border-gray-200  py-1 px-2  rounded-lg  focus:outline-none"
+              placeholder="Search Price/PLaces"
+              className=" max-w-20 lg:max-w-44 md:max-w-44 xl:max-w-44 shadow-white border  border-gray-200  py-1 pl-[10px]  rounded-lg  focus:outline-none"
             />
             <span className="border-l border-gray-300 "></span>
             <button className="bg-green-500 text-white rounded-lg p-[4px]">
