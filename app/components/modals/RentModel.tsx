@@ -126,8 +126,9 @@ export default function RentModel() {
         value={location}
         onChange={(value) => setCustomValue("location", value)}
       />
-      <div className="h-8"></div>
-      <Map center={location?.latlng} />
+      <div className="-z-0">
+        <Map center={location?.latlng} />
+      </div>
     </div>
   );
 

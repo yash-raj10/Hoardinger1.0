@@ -44,6 +44,25 @@ export default function Navbar({ currentUser }: navbarProps) {
     rentModel.onOpen();
   }, [currentUser, loginModel, rentModel]);
 
+  function liveSearch() {
+    let cards: NodeListOf<HTMLElement> = document.querySelectorAll(".cards");
+    let search_query: HTMLInputElement | null = document.getElementById(
+      "searchbox"
+    ) as HTMLInputElement | null;
+    for (var i = 0; i < cards.length; i++) {
+      if (search_query) {
+        let searchQuery: string = search_query.value.toLowerCase();
+        for (let i = 0; i < cards.length; i++) {
+          if (cards[i].innerText.toLowerCase().includes(searchQuery)) {
+            cards[i].classList.remove("is-hidden");
+          } else {
+            cards[i].classList.add("is-hidden");
+          }
+        }
+      }
+    }
+  }
+
   return (
     <div className="z-10 fixed w-full bg-white ">
       <div className={roboto.className}>
@@ -72,7 +91,13 @@ export default function Navbar({ currentUser }: navbarProps) {
             <span className=" font-extrabold text-xl">Hoardinger</span>
           </div>
           <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-2 py-1 m-1">
-            <div className=" items-center flex">Search Places</div>
+            <input
+              type="search"
+              id="searchbox"
+              onInput={() => liveSearch()}
+              placeholder="Search Price / PLaces"
+              className=" max-w-48 shadow-white border  border-gray-200  py-1 px-2  rounded-lg  focus:outline-none"
+            />
             <span className="border-l border-gray-300 "></span>
             <button className="bg-green-500 text-white rounded-lg p-[4px]">
               <svg
