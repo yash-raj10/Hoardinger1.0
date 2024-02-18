@@ -64,7 +64,7 @@ export default function Navbar({ currentUser }: navbarProps) {
   }
 
   return (
-    <div className="z-10 fixed w-full bg-white ">
+    <div className="z-20 fixed w-full bg-white ">
       <div className={roboto.className}>
         <div className="flex justify-between items-center border shadow-md py-1">
           {/* <p>Followers: {ProfilePage.data.}</p> */}

@@ -106,7 +106,7 @@ export async function ListingInfo({
 
   return (
     <>
-      <div className="col-span-4 flex flex-col gap-8 p-5 -z-10">
+      <div className="col-span-4 flex flex-col gap-8 p-5 z-10">
         <div className="flex flex-col gap-2">
           <div className="text-xl font-semibold flex flex-row items-center gap-2">
             <div>Posted by {user?.name}</div>
@@ -130,7 +130,7 @@ export async function ListingInfo({
         <hr />
         <form className="items-center flex justify-center ">
           <button
-            className="max-w-40 border-2 rounded-lg  px-4 py-2"
+            className="max-w-40 border-2 rounded-lg  px-4 py-2 transition duration-300 ease-in-out hover:scale-110"
             onClick={handleFormSubmit}
           >
             Send Email!

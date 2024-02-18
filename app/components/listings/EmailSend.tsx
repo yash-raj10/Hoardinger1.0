@@ -6,16 +6,15 @@ import nodemailer from "nodemailer";
 
 export async function send(user: SafeUser) {
   const currentUser = await getCurrentUser();
-  console.log("hlo mf");
 
   const to = user.email;
   const stringifiedTo = JSON.stringify(to);
   await sendMail(
     stringifiedTo,
     "yash",
-    "test mail",
+    "Mail from a Client on Hoardinger.",
 
-    `<h1>hello from ${currentUser?.email}<h1/>`
+    `<p>Hey, I am ${currentUser?.email}, i just found your listed Hoarding on Hoardinger and i am interested in renting it!, Lets schedule a Call.<p/>`
   );
 
   async function sendMail(
