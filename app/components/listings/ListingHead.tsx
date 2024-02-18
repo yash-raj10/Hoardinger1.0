@@ -25,7 +25,7 @@ function ListingHead({ title, locationValue, imageSrc, id }: ListingHeadProps) {
         title={title}
         subtitle={`${location?.region}, ${location?.label} `}
       />
-      <div className="w-full h-[60vh] overflow-hidden rounded-xl  ">
+      <div className="w-full h-[20vh] md:h-[60vh] lg:h-[60vh] overflow-hidden rounded-xl  ">
         <Image
           alt="Image"
           src={imageSrc}

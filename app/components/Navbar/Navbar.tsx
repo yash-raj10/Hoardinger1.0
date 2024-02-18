@@ -67,29 +67,34 @@ export default function Navbar({ currentUser }: navbarProps) {
     <div className="z-10 fixed w-full bg-white ">
       <div className={roboto.className}>
         <div className="flex justify-between items-center border shadow-md py-1">
-          <div className=" hidden md:flex lg:flex gap-1  items-center ">
-            {/* <p>Followers: {ProfilePage.data.}</p> */}
-            <svg
-              className="h-6 w-6 ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-              />
-            </svg>
-            <span className=" font-extrabold text-xl">Hoardinger</span>
-          </div>
+          {/* <p>Followers: {ProfilePage.data.}</p> */}
+          <Link href="/">
+            <div className="  md:flex lg:flex gap-1  items-center ">
+              <svg
+                className="h-8 w-7 ml-2"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                />
+              </svg>
+              <span className=" hidden md:flex lg:flex font-extrabold text-xl">
+                Hoardinger
+              </span>
+            </div>
+          </Link>
+
           <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-2 py-1 m-1">
             <input
               type="search"
@@ -119,7 +124,7 @@ export default function Navbar({ currentUser }: navbarProps) {
 
           {/* ----------------------------------UserMenu--------------------------------------------- */}
 
-          <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-2 py-[2px] m-1">
+          <div className="flex border gap-1 border-gray-300 rounded-xl shadow-sm shadow-gray-400 px-[6px] py-[2px] m-1">
             <div onClick={onRent} className="items-center flex">
               Add Your&apos;s
             </div>

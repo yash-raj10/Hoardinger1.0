@@ -15,7 +15,7 @@ interface ListingClientProps {
 const ListingClient = ({ listing }: ListingClientProps) => {
   return (
     <div className="max-w-screen-lg mx-auto pt-8 ">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col justify-center">
         <ListingHead
           title={listing.title}
           imageSrc={listing.imageSrc}
@@ -24,7 +24,7 @@ const ListingClient = ({ listing }: ListingClientProps) => {
           // currentUser={currentUser}
         />
 
-        <div className=" grid grid-cols-1  md:grid-cols-1 md:gap-10 mt-6">
+        <div className=" grid grid-cols-1  md:grid-cols-1 md:gap-10 ">
           <ListingInfo
             user={listing.user}
             description={listing.description}
